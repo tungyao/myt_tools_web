@@ -10,7 +10,7 @@ function bytesToHexArray(bytes) {
     return hexArray;
 }
 
-function renderBase64Tool(container) {
+export function renderBase64Tool(container) {
     container.innerHTML = `
         <div class="tool-card">
             <div class="input-section">

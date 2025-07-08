@@ -23,7 +23,7 @@ function xorProcessBytes(dataBytes, keyBytes) {
 
 
 // XOR工具渲染和功能
-function renderXorTool(container) {
+export function renderXorTool(container) {
     container.innerHTML = `
         <div class="tool-card">
             <div class="input-section">

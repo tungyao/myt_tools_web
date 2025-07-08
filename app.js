@@ -1,4 +1,6 @@
-
+import {renderBase64Tool} from './base64Tool.js';
+import {renderXorTool} from './xorTool.js';
+import {renderProgrammerCalculator} from './programmerCalculator.js';
 
 // 工具注册表 - 方便后续添加新工具
 const tools = [

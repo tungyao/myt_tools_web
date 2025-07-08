@@ -1,5 +1,5 @@
 // 程序员进制转换工具
-function renderProgrammerCalculator(container) {
+export function renderProgrammerCalculator(container) {
 
     container.innerHTML = '';
     const card = document.createElement('div');
