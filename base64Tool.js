@@ -57,10 +57,9 @@ export function renderBase64Tool(container) {
                 // 移除data URL前缀
                 const base64String = e.target.result.split(',')[1];
                 if (getSelectedOutputFormat() === 'array') {
-                    const binaryStr = atob(base64String);
-                    const bytes = new Uint8Array(binaryStr.length);
-                    for (let i = 0; i < binaryStr.length; i++) {
-                        bytes[i] = binaryStr.charCodeAt(i);
+                    const bytes = new Uint8Array(base64String.length);
+                    for (let i = 0; i < base64String.length; i++) {
+                        bytes[i] = base64String.charCodeAt(i);
                     }
                     outputTextarea.value = bytesToHexArray(bytes);
                     resultBtn.innerText = "结果: " + bytes.length;
