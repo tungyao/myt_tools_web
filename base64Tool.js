@@ -1,14 +1,6 @@
 // base64Tool.js
+import { bytesToHexArray } from "./global.js";
 
-// Helper function to convert bytes to hex array
-function bytesToHexArray(bytes) {
-    const hexArray = [];
-    bytes.forEach(byte => {
-        const hex = byte.toString(16).padStart(2, '0');
-        hexArray.push(hex);
-    });
-    return hexArray;
-}
 
 export function renderBase64Tool(container) {
     container.innerHTML = `
@@ -71,7 +63,7 @@ export function renderBase64Tool(container) {
                         bytes[i] = binaryStr.charCodeAt(i);
                     }
                     outputTextarea.value = bytesToHexArray(bytes);
-                    resultBtn.innerText = "结果: " + outputTextarea.value.length;
+                    resultBtn.innerText = "结果: " + bytes.length;
 
                 } else {
                     outputTextarea.value = base64String;

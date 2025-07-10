@@ -1,11 +1,4 @@
-// 辅助函数：将字节数组转换为16进制数组格式字符串 (全局可用)
-function bytesToHexArray(bytes, lineLength = 16) {
-    return bytes.reduce((acc, byte, index) => {
-        const hex = `0x${byte.toString(16).padStart(2, '0').toUpperCase()}`;
-        const isNewLine = index > 0 && (index % lineLength === 0);
-        return acc + (isNewLine ? '\n' : index > 0 ? ', ' : '') + hex;
-    }, '');
-}
+import { bytesToHexArray } from "./global.js";
 
 // 辅助函数：验证16进制密钥
 function validateHexKey(key) {
@@ -50,7 +43,7 @@ export function renderXorTool(container) {
                 <label><input type="radio" name="xor-output-format" value="array"> 数组格式 (16个/行)</label>
             </div>
             <div class="output-section">
-                <h3>结果</h3>
+                <h3 id="xor_result">结果</h3>
                 <textarea id="xor-output" readonly placeholder="结果将显示在这里..."></textarea>
                 <button id="xor-download-btn" style="margin-top:10px;">下载结果</button>
             </div>
@@ -68,7 +61,7 @@ export function renderXorTool(container) {
     const encodeFileBtn = document.getElementById('xor-encode-file-btn');
     const decodeFileBtn = document.getElementById('xor-decode-file-btn');
     const downloadBtn = document.getElementById('xor-download-btn');
-
+    const xor_result = document.getElementById("xor_result");
     // 获取选中的输出格式
     function getSelectedOutputFormat() {
         return document.querySelector('input[name="xor-output-format"]:checked').value;
@@ -89,8 +82,11 @@ export function renderXorTool(container) {
 
             if (getSelectedOutputFormat() === 'array') {
                 outputTextarea.value = bytesToHexArray(resultBytes);
+                xor_result.innerText = "结果: " + resultBytes.length;
             } else {
                 outputTextarea.value = new TextDecoder().decode(resultBytes);
+                xor_result.innerText = "结果: " + outputTextarea.value.length;
+
             }
         }
         catch (e) {
@@ -110,6 +106,7 @@ export function renderXorTool(container) {
         keyInput.value = '';
         outputTextarea.value = '';
         fileInput.value = '';
+        xor_result.innerText = "结果";
     });
 
     // 编码文件
@@ -122,7 +119,7 @@ export function renderXorTool(container) {
         if (!keyBytes) { alert('请输入有效的16进制密钥'); return; }
 
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             try {
                 const dataBytes = new Uint8Array(e.target.result);
                 const resultBytes = xorProcessBytes(dataBytes, keyBytes);
