@@ -1,6 +1,7 @@
 import {renderBase64Tool} from './base64Tool.js';
 import {renderXorTool} from './xorTool.js';
 import {renderProgrammerCalculator} from './programmerCalculator.js';
+import {renderRandomStringTool} from './randomStringTool.js';
 
 // 工具注册表 - 方便后续添加新工具
 const tools = [
@@ -18,6 +19,11 @@ const tools = [
         id: 'programmer-calc',
         name: '进制转换',
         render: renderProgrammerCalculator
+    },
+    {
+        id: 'random-string',
+        name: '随机字符串生成',
+        render: renderRandomStringTool
     }
 ];
 
