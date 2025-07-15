@@ -2,28 +2,34 @@ import {renderBase64Tool} from './base64Tool.js';
 import {renderXorTool} from './xorTool.js';
 import {renderProgrammerCalculator} from './programmerCalculator.js';
 import {renderRandomStringTool} from './randomStringTool.js';
+import {renderFileToArrayTool} from './fileToArrayTool.js';
 
 // 工具注册表 - 方便后续添加新工具
 const tools = [
     {
         id: 'base64',
-        name: 'Base64编解码',
+        name: 'Base64编解码工具',
         render: renderBase64Tool
     },
     {
         id: 'xor',
-        name: 'XOR编码',
+        name: 'XOR加密解密工具',
         render: renderXorTool
     },
     {
         id: 'programmer-calc',
-        name: '进制转换',
+        name: '程序员进制转换计算器',
         render: renderProgrammerCalculator
     },
     {
         id: 'random-string',
-        name: '随机字符串生成',
+        name: '随机字符串生成工具',
         render: renderRandomStringTool
+    },
+    {
+        id: 'file-to-array',
+        name: '文件转数组工具',
+        render: renderFileToArrayTool
     }
 ];
 
@@ -66,6 +72,7 @@ function selectTool(toolId) {
 function closeTool() {
     activeTool = null;
     toolNameElement.textContent = '请选择一个工具';
+    document.title = '多功能工具集 - Base64/XOR/进制转换/随机字符串生成工具';
     toolBodyElement.innerHTML = '';
     closeToolButton.classList.add('hidden');
     document.querySelectorAll('#tools-list li').forEach(li => {
