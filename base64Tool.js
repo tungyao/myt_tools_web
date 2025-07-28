@@ -115,7 +115,7 @@ export function renderBase64Tool(container) {
         const text = inputTextarea.value;
         if (!text) return;
         try {
-            let data = (encodeURIComponent(text));
+            let data = text;
             const encoded = btoa(data);
             if (getSelectedOutputFormat() === 'array') {
                 // 将Base64字符串转换为字节数组
@@ -140,7 +140,7 @@ export function renderBase64Tool(container) {
         const text = inputTextarea.value;
         if (!text) return;
         try {
-            const decodedStr = decodeURIComponent(escape(atob(text)));
+            const decodedStr = atob(text);
             if (getSelectedOutputFormat() === 'array') {
                 // 将解码后的字符串转换为字节数组
                 const bytes = new Uint8Array(decodedStr.length);
@@ -148,7 +148,7 @@ export function renderBase64Tool(container) {
                     bytes[i] = decodedStr.charCodeAt(i);
                 }
                 outputTextarea.value = bytesToHexArray(bytes);
-                resultBtn.innerText = "结果: " + outputTextarea.value.length;
+                resultBtn.innerText = "结果: " + bytes.length;
             } else {
                 outputTextarea.value = decodedStr;
                 resultBtn.innerText = "结果: " + decodedStr.length;
