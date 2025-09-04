@@ -6,3 +6,13 @@ export function bytesToHexArray(bytes, lineLength = 16) {
         return acc + (isNewLine ? ',\n' : index > 0 ? ', ' : '') + hex;
     }, '');
 }
+
+// 从字符串转到数组
+export function strToHexArray(str, lineLength = 16){
+    const bytes = new Uint8Array(str.length);
+    for (let i = 0; i < str.length; i++) {
+        bytes[i] = str.charCodeAt(i);
+    }
+    return bytesToHexArray(bytes,lineLength);
+
+}

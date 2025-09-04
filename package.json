@@ -1,4 +1,10 @@
 {
+  "name": "tools-web",
+  "version": "1.0.0",
+  "description": "Tools for web development",
+  "scripts": {
+    "start": "npx http-server"
+  },
   "dependencies": {
     "http-server": "^14.1.1"
   }

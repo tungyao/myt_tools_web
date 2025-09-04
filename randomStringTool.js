@@ -1,3 +1,4 @@
+import { strToHexArray } from "./global.js";
 export function renderRandomStringTool(container) {
     container.innerHTML = `
         <div class="tool-card">
@@ -11,7 +12,7 @@ export function renderRandomStringTool(container) {
                     <label><input type="checkbox" id="include-uppercase" checked> 包含大写字母 (A-Z)</label>
                     <label><input type="checkbox" id="include-lowercase" checked> 包含小写字母 (a-z)</label>
                     <label><input type="checkbox" id="include-numbers" checked> 包含数字 (0-9)</label>
-                    <label><input type="checkbox" id="include-special" checked> 包含特殊字符 (!@#$%^&*())</label>
+                    <label><input type="checkbox" id="include-special" checked> 包含特殊字符 (!@#$%^&*()_-+=)</label>
                 </div>
                 <div class="button-group" style="margin-top: 10px;">
                     <button id="generate-btn">生成随机字符串</button>
@@ -22,6 +23,7 @@ export function renderRandomStringTool(container) {
             <div class="output-section">
                 <h3>结果</h3>
                 <textarea id="random-output" readonly placeholder="生成的随机字符串将显示在这里..."></textarea>
+                <textarea id="random-output-arr" readonly placeholder="生成的随机字符数组将显示在这里..."></textarea>
             </div>
         </div>
     `;
@@ -36,12 +38,13 @@ export function renderRandomStringTool(container) {
     const copyBtn = document.getElementById('copy-btn');
     const clearBtn = document.getElementById('clear-btn');
     const outputTextarea = document.getElementById('random-output');
+    const outputTextareaArr = document.getElementById('random-output-arr');
 
     // 定义字符集
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const numberChars = '0123456789';
-    const specialChars = '!@#$%^&*()';
+    const specialChars = '!@#$%^&*()_-+=';
 
     // 生成随机字符串
     function generateRandomString() {
@@ -72,6 +75,7 @@ export function renderRandomStringTool(container) {
         }
 
         outputTextarea.value = result;
+        outputTextareaArr.value = strToHexArray(result);
     }
 
     // 复制到剪贴板
@@ -91,6 +95,7 @@ export function renderRandomStringTool(container) {
     // 清空
     function clearOutput() {
         outputTextarea.value = '';
+        outputTextareaArr.value = '';
     }
 
     // 事件监听
