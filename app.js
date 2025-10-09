@@ -18,7 +18,7 @@ const tools = [
     },
     {
         id: 'programmer-calc',
-        name: '程序员进制转换计算器',
+        name: '进制计算器',
         render: renderProgrammerCalculator
     },
     {
